@@ -33,12 +33,12 @@ updated_at: datetime
 ```
 
 This table contains about several millions records.
-Server executes serveral different queries by this table with execution time greater then 1 second.
+Server executes serveral different queries with this table, with execution time greater then 1 second.
 
 Queries are:
 
 ```sql
- SELECT COUNT(*) FROM likes WHERE user_id = ?
+  SELECT COUNT(*) FROM likes WHERE user_id = ?
   SELECT COUNT(*) FROM likes WHERE post_id = ?
   SELECT * FROM likes WHERE user_id = ? AND post_id = ?
 ```
