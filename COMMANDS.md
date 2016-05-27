@@ -45,3 +45,10 @@ Testing cache. In rails 5 we have different way to enable it:
 rake tmp:clear
 rails dev:cache  #this is the togle!
 ```
+
+## Taks 1 (pure tcp sockets variant )
+
+For creating binstubs:
+```
+bundle install --binstubs
+```
