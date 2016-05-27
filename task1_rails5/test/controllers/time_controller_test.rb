@@ -6,4 +6,5 @@ class TimeControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  # todo: cover the TimeController with tests
 end

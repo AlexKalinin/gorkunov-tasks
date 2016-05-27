@@ -1,7 +1,5 @@
 require 'test_helper'
 
 class TownTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  # todo: cover the Town model with tests
 end

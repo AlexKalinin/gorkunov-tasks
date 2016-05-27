@@ -4,7 +4,6 @@ class CreateTowns < ActiveRecord::Migration[5.0]
     create_table :towns do |t|
       t.string :name
       t.string :time_zone
-      #t.timestamps
     end
   end
 end
