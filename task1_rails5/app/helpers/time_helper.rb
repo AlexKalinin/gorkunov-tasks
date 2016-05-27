@@ -21,4 +21,9 @@ module TimeHelper
     query.mb_chars.downcase.to_s
   end
 
+  # will format time to 2015-04-11 10:30:50
+  # %Y-%m-%d %H-%M-%S
+  def format_time(t)
+    t.strftime('%Y-%m-%d %H-%M-%S')
+  end
 end
