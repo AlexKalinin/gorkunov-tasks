@@ -4,16 +4,30 @@
   %a{href: 'https://github.com/AlexKalinin/gorkunov-tasks/issues/1'} #1
   for details
 
+%hr
+
 %p
-  Try use
+  Try to use
   %a{href: time_url, target: 'blank'} /time
-  for getting UTC time
+  for getting UTC time only
 
+%hr
 
 %p
-  Try use
+  Try to use
   %a{href: time_url + '?Moscow,New%20York', target: 'blank'} /time?Moscow,New%20York
   for getting UTC time, and time for cities:
   %b Moscow
   and
   %b New York
+
+%hr
+
+%p
+  Try to use
+  %a{href: time_url + '?Moscow,New%20York,Bishkek', target: 'blank'} /time?Moscow,New%20York,Bishkek
+  for getting UTC time, and time for cities:
+  %b Moscow,
+  %b New York,
+  and
+  %b Bishkek
