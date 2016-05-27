@@ -1,0 +1,13 @@
+# Main configuration file
+
+
+# The ip-address for bind
+# Posible values:
+#   localhost, 127.0.0.1,
+#   or the ip-address of any systtem ethernet interface
+listen_address: localhost
+
+# The tcp-port for bind.
+# Posible values:
+#   80, 8080, or any from 1 - 65535
+listen_port: 3000

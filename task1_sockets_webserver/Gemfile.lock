@@ -3,6 +3,7 @@ GEM
   specs:
     byebug (9.0.4)
     coderay (1.1.1)
+    logger (1.2.8)
     method_source (0.8.2)
     pry (0.10.3)
       coderay (~> 1.1.0)
@@ -20,6 +21,7 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  logger
   pry-byebug
   pry-rails
 
