@@ -23,49 +23,10 @@ logger.debug "The configuration is: #{$APP_CONFIG.to_s}"
 
 s = Server.instance
 s.init listen_address, listen_port, workers_amount
-s.start
-
-trap 'SIGINT' do
-  puts 'Exiting'
-  exit 130
+begin
+  s.start
+rescue Interrupt => e
+  logger.info 'MAIN: Waiting for workers stop...'
+  s.stop
+  logger.info 'MAIN: Server finished. Good Bye!'
 end
-
-# logger.info "Starting webserver at #{listen_address}:#{listen_port}"
-# server = TCPServer.new(listen_address, listen_port)
-# loop do
-#   Thread.fork(server.accept) do |socket|
-#     logger.debug "Got new connection from client: #{client_addrinfo.marshal_dump.to_s}."
-#     request = socket.gets
-#     # sleep(10)
-#     logger.debug "Got request: #{request}"
-#     response = "Hello World!\n"
-#     socket.print "HTTP/1.1 200 OK\r\n" +
-#                      "Content-Type: text/plain\r\n" +
-#                      "Content-Length: #{response.bytesize}\r\n" +
-#                      "Connection: close\r\n"
-#     socket.print "\r\n"
-#     socket.print response
-#
-#     socket.close
-#     logger.debug 'Client disconnected.'
-#   end
-# end
-#
-# server = TCPServer.new('0.0.0.0', 3000)
-#
-# loop do
-#
-#   socket = server.accept
-#   request = socket.gets
-#   STDERR.puts request # for debug
-#   response = "Hello World!\n"
-#   socket.print "HTTP/1.1 200 OK\r\n" +
-#                    "Content-Type: text/plain\r\n" +
-#                    "Content-Length: #{response.bytesize}\r\n" +
-#                    "Connection: close\r\n"
-#   socket.print "\r\n"
-#   socket.print response
-#
-#   socket.close
-# end
-#
