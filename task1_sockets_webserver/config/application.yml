@@ -12,3 +12,10 @@ listen_address: 0.0.0.0
 # Posible values:
 #   80, 8080, 3000, or any from 1 - 65535
 listen_port: 3000
+
+
+# The workers number
+# Use the same amount as you have CPUs
+# correct values are:
+# 1, 2, 3 ...
+workers_amount: 2
