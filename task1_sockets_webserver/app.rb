@@ -19,7 +19,7 @@ listen_port = APP_CONFIG['listen_port']
 logger.info "Starting webserver at #{listen_address}:#{listen_port}"
 Socket.tcp_server_loop(listen_address, listen_port){ |socket, client_addrinfo|
   logger.debug "Got new connection from client: #{client_addrinfo.marshal_dump.to_s}."
-
+  sleep(10)
   request = socket.gets
   logger.debug "Got request: #{request}"
   response = "Hello World!\n"
