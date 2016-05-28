@@ -1,4 +1,5 @@
 class Request
+  @request_body = ''
 
   def initialize(socket)
     @socket = socket
@@ -7,6 +8,6 @@ class Request
   end
 
   def to_s
-    "Client #{@ip}:{@port} with socket-state: #{socket.ready?}"
+    "Request #{@ip}:#{@port} with socket-state: #{socket.ready?} and with request budy: #{@request_body}"
   end
 end

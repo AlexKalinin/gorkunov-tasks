@@ -19,3 +19,8 @@ listen_port: 3000
 # correct values are:
 # 1, 2, 3 ...
 workers_amount: 2
+
+
+# Waiting interval for worker to try get one more task
+# The value in seconds
+worker_loop_timeout: 1

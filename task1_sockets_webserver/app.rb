@@ -2,11 +2,12 @@ require 'rubygems'
 require 'bundler/setup'
 Bundler.require
 
+require 'require_all'
 require 'byebug'
 require 'pry'
 require 'logger'
 
-require './src/server'
+require_all 'src'
 
 # load configuration
 $APP_CONFIG = YAML.load_file(File.join(File.dirname(__FILE__), 'config/application.yml'))
@@ -20,8 +21,14 @@ workers_amount = $APP_CONFIG['workers_amount']
 logger.info 'Starting program, hello!'
 logger.debug "The configuration is: #{$APP_CONFIG.to_s}"
 
-s = Server.new listen_address, listen_port, workers_amount
+s = Server.instance
+s.init listen_address, listen_port, workers_amount
 s.start
+
+trap 'SIGINT' do
+  puts 'Exiting'
+  exit 130
+end
 
 # logger.info "Starting webserver at #{listen_address}:#{listen_port}"
 # server = TCPServer.new(listen_address, listen_port)
