@@ -5,11 +5,12 @@ class Request
     @port = socket.remote_address.ip_port
     @logger = Logger.new(STDOUT)
     @request_body = @socket.gets
+    @request_id = SecureRandom.uuid
   end
 
   # Process this query
   def handle
-    @logger.debug "Handling request #{self.to_s}"
+    @logger.debug "#{self}: Handling request with body: #{@request_body}."
 
     @logger.debug 'Waiting 10 seconds...'
     sleep(10)
@@ -23,10 +24,10 @@ class Request
     @socket.print response
     @socket.close
 
-    @logger.debug "Done request handling for #{@ip}:#{@port}"
+    @logger.debug "#{self}: Done request handling."
   end
 
   def to_s
-    "Request #{@ip}:#{@port}; body: #{@request_body}"
+    "[Request #{@ip}:#{@port}@#{@request_id}]"
   end
 end

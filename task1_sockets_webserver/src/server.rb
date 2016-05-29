@@ -27,25 +27,25 @@ class Server
   def start
     @is_need_stop = false
 
-    @logger.debug "MAIN: Starting #{@workers_amount} workers"
+    @logger.debug "#{self}: Starting ##{@workers_amount} workers"
     1.upto @workers_amount do
       w = Worker.new
       w.start
       @workers_pool << w
     end
 
-    @logger.info "MAIN: Listning incoming connections at #{@ip_addr}:#{@ip_port}"
+    @logger.info "#{self}: Listning incoming connections at #{@ip_addr}:#{@ip_port}"
     until @is_need_stop
       socket = @server.accept
       request = Request.new socket
-      @logger.info "MAIN: Got new request: #{request}"
+      @logger.info "#{self}: Got new request: #{request}"
       @requests_pool << request
-      @logger.debug "MAIN: Sent the request to the pool: #{request}"
+      @logger.debug "#{self}: Sent the request to the pool: #{request}"
     end
   end
 
   def stop
-    @logger.info 'MAIN: Stoping workers'
+    logger.debug 'MAIN: Server: set flag to stop'
 
     @is_need_stop = true
 
@@ -62,5 +62,9 @@ class Server
     @lock.synchronize do
       @requests_pool.shift
     end
+  end
+
+  def to_s
+    '[Server]'
   end
 end
