@@ -65,7 +65,7 @@ class Response
       next if t_town.empty?
       TZInfo::Timezone.all.each do |tz|
         if Response.tokenize_timezone(tz.name).include?(t_town)
-          result << town + ': ' + Response.format_time(Time.now) + "\n"
+          result << town + ': ' + Response.format_time(tz.utc_to_local(Time.now.utc)) + "\n"
           break
         end
       end
