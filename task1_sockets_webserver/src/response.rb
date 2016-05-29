@@ -55,6 +55,15 @@ class Response
   # Generates time text response
   # +towns_arr+ - the array, I should get to render time in this towns.
   def self.gen_time(towns_arr)
+    result = 'UTC: ' + Response.format_time(Time.now.utc) + "\n"
 
+
+    result
+  end
+
+
+
+  def self.format_time(t)
+    t.strftime('%Y-%m-%d %H-%M-%S')
   end
 end

@@ -31,15 +31,15 @@ class Request
     qs_hash = Request.parse_query_string @params[:query_string]
     case qs_hash[:action]
       when :root
-        @logger.debug "#{self}: Requested root_url."
+        @logger.debug "#{self}: Requested root_url, rendering public/root.html"
         @socket.print Response.gen_root
         @socket.close
       when :time
-        @logger.debug "#{self}: Requested root_url."
-        @socket.print Response.gen_time qs_hash[:params],
+        @logger.debug "#{self}: Requested time_url, rendering time"
+        @socket.print Response.gen_time qs_hash[:params]
         @socket.close
       else
-        @logger.warn "#{self}: Unknown action #{qs_hash[:action]}!"
+        @logger.warn "#{self}: Requested unkown url, rendering 404"
         @socket.print Response.gen_404
         @socket.close
     end
