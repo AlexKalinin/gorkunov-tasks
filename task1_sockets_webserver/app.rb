@@ -26,7 +26,7 @@ s = Server.instance
 s.init listen_address, listen_port, workers_amount
 begin
   s.start
-rescue Interrupt => e
+rescue Interrupt
   logger.info '[MAIN]: Ctrl+C pressed, shutting down server...'
   s.stop
   logger.info '[MAIN]: Server shutdown successfully. Good Bye!'

@@ -1,3 +1,5 @@
+require 'tzinfo'
+
 class Response
   # 400 Bad Request
   # see https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
@@ -57,6 +59,16 @@ class Response
   def self.gen_time(towns_arr)
     result = 'UTC: ' + Response.format_time(Time.now.utc) + "\n"
 
+    towns_arr ||= []
+    towns_arr.each do |town|
+      next if town.empty?
+      TZInfo::Timezone.all.each do |tz|
+        if Response.tokenize_timezone(tz.name).include?(Response.tokenize_timezone(town))
+          result << town + ': ' + Response.format_time(Time.now) + "\n"
+          break
+        end
+      end
+    end
 
     result
   end
@@ -65,5 +77,17 @@ class Response
 
   def self.format_time(t)
     t.strftime('%Y-%m-%d %H-%M-%S')
+  end
+
+
+  # Get toket from timezone name
+  # For example
+  #   New York --> newyork
+  #   New_York --> newyork
+  #   neW_york --> newyork
+  def self.tokenize_timezone(tz)
+    tz ||= ''
+    tz = tz.gsub(/[^A-Za-z]+/, '')
+    tz.downcase
   end
 end

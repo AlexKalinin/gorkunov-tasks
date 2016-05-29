@@ -1,3 +1,5 @@
+[![Code Climate](https://codeclimate.com/github/AlexKalinin/gorkunov-tasks/badges/gpa.svg)](https://codeclimate.com/github/AlexKalinin/gorkunov-tasks)
+
 # Ruby on Rails Employment Test Tasks
 
 ## Task 1
