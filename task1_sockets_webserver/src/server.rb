@@ -45,12 +45,13 @@ class Server
   end
 
   def stop
-    logger.debug 'MAIN: Server: set flag to stop'
+    @logger.debug "#{self}: set flag to stop"
 
     @is_need_stop = true
 
     # Remove and clear all workers
     @workers_pool.each do |w|
+      @logger.debug "#{self}: sending signal to stop the worker #{w}"
       w.stop
     end
     @workers_pool.clear

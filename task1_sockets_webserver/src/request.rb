@@ -13,7 +13,7 @@ class Request
     @logger.debug "#{self}: Handling request with body: #{@request_body}."
 
     @logger.debug 'Waiting 10 seconds...'
-    sleep(10)
+    binding.pry
 
     response = "Hello World!\n"
     @socket.print "HTTP/1.1 200 OK\r\n" +

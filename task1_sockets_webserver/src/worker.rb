@@ -25,6 +25,10 @@ class Worker
   def stop
     @logger.debug "#{self}: Stoping ..."
     @is_need_stop = true
+    until @thread.nil?
+      @logger.debug "#{self}: Waiting to stop thread..."
+      sleep 1
+    end
   end
 
   def to_s
