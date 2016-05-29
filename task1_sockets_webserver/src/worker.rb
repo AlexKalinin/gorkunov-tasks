@@ -5,7 +5,7 @@ class Worker
   @is_need_stop = false
   @thread = nil
 
-  def initialize()
+  def initialize
     @worker_id = SecureRandom.uuid
     @logger = Logger.new(STDOUT)
     @server = Server.instance
@@ -45,6 +45,8 @@ class Worker
           if !r.nil?
             @logger.debug "#{self}: Handling request: #{r}"
             r.handle
+            @logger.debug "#{self}: Done handling request: #{r}, "
+            r.mem_free
           else
             sleep($APP_CONFIG['worker_loop_timeout'])
           end

@@ -10,7 +10,8 @@ require 'logger'
 require_all 'src'
 
 # load configuration
-$APP_CONFIG = YAML.load_file(File.join(File.dirname(__FILE__), 'config/application.yml'))
+$APP_ROOT = File.dirname(__FILE__)
+$APP_CONFIG = YAML.load_file(File.join($APP_ROOT, 'config/application.yml'))
 
 
 logger = Logger.new(STDOUT)
