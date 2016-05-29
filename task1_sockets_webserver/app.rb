@@ -20,7 +20,7 @@ listen_port = $APP_CONFIG['listen_port']
 workers_amount = $APP_CONFIG['workers_amount']
 
 logger.info '[MAIN]: Starting program, hello!'
-logger.debug "[MAIN]: The configuration is: #{$APP_CONFIG.to_s}"
+logger.debug "[MAIN]: The configuration is: #{$APP_CONFIG}"
 
 s = Server.instance
 s.init listen_address, listen_port, workers_amount

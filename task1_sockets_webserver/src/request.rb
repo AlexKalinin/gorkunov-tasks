@@ -1,3 +1,4 @@
+# HTTP-requests handler
 class Request
   def initialize(socket)
     @socket = socket
@@ -98,71 +99,69 @@ class Request
   end
 
 
-  private
-
-    # Validate parsed requst params
-    # +params+ - request params from Request#parse(request_body)
-    # todo: cover with tests!
-    def self.params_valid?(params)
-      if params.nil?
-        return {
-            result: false,
-            response: Response.gen_400,
-            message: 'Got empty request, closing with status 400...'
-        }
-      end
-
-      # only GET queries!
-      if params[:method] != 'GET'
-        return {
-            result: false,
-            response: Response.gen_400,
-            message: "Got request with wrong http-method. Expected GET, got #{params[:method]} closing with status 400..."
-        }
-      end
-
-      valid_http = %w(HTTP/0.9 HTTP/1.0 HTTP/1.1 HTTP/1.2 HTTP/2.0)
-      unless valid_http.include? params[:http_version]
-        return {
-            result: false,
-            response: Response.gen_400,
-            message: "Got request with wrong http-version. Expected HTTP/1.1 or HTTP/2.0, got #{params[:method]} closing with status 400..."
-        }
-      end
-
-      # request is good!
-      {result: true, response: '', message: 'ok'}
+  # Validate parsed requst params
+  # +params+ - request params from Request#parse(request_body)
+  # todo: cover with tests!
+  def self.params_valid?(params)
+    if params.nil?
+      return {
+          result: false,
+          response: Response.gen_400,
+          message: 'Got empty request, closing with status 400...'
+      }
     end
 
-    # Will parse query_string.
-    # Will return hash:
-    # qs_hash[:action] - posible values:
-    #   * :unknown - if unknown action
-    #   * :root - if need to show root page
-    #   * :time - if need to show time page
-    # qs_hash[:params] - posible values:
-    #   * [] - empty array, if in the GET query there were no any params
-    #   * ['Moscow', 'New York'] - array with town names, if town names specified, with comma separation
-    def self.parse_query_string(query_string)
-      qarr = query_string.split('?')
-      path = qarr.shift
-
-      params = []
-      unless (p = qarr.shift).nil?
-        p = URI.decode(p)
-        params = p.split ','
-      end
-      # params_string = URI.decode(qarr.shift)
-      # params = params_string.split ','
-      case path
-        when '/'
-          return {action: :root, params: params}
-        when '/time'
-          return {action: :time, params: params}
-        else
-          return {action: :unknown, params: params}
-      end
-
+    # only GET queries!
+    if params[:method] != 'GET'
+      return {
+          result: false,
+          response: Response.gen_400,
+          message: "Got request with wrong http-method. Expected GET, got #{params[:method]} closing with status 400..."
+      }
     end
+
+    valid_http = %w(HTTP/0.9 HTTP/1.0 HTTP/1.1 HTTP/1.2 HTTP/2.0)
+    unless valid_http.include? params[:http_version]
+      return {
+          result: false,
+          response: Response.gen_400,
+          message: "Got request with wrong http-version. Expected HTTP/1.1 or HTTP/2.0, got #{params[:method]} closing with status 400..."
+      }
+    end
+
+    # request is good!
+    {result: true, response: '', message: 'ok'}
+  end
+
+  # Will parse query_string.
+  # Will return hash:
+  # qs_hash[:action] - posible values:
+  #   * :unknown - if unknown action
+  #   * :root - if need to show root page
+  #   * :time - if need to show time page
+  # qs_hash[:params] - posible values:
+  #   * [] - empty array, if in the GET query there were no any params
+  #   * ['Moscow', 'New York'] - array with town names, if town names specified, with comma separation
+  def self.parse_query_string(query_string)
+    qarr = query_string.split('?')
+    path = qarr.shift
+
+    params = []
+    unless (p = qarr.shift).nil?
+      p = URI.decode(p)
+      params = p.split ','
+    end
+    # params_string = URI.decode(qarr.shift)
+    # params = params_string.split ','
+    case path
+      when '/'
+        return {action: :root, params: params}
+      when '/time'
+        return {action: :time, params: params}
+      else
+        return {action: :unknown, params: params}
+    end
+
+  end
 
 end
