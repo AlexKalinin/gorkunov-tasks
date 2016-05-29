@@ -27,12 +27,12 @@ class Request
       return
     end
 
-    #parsing the query
+    # parsing the query
     qs_hash = Request.parse_query_string @params[:query_string]
     case qs_hash[:action]
       when :root
         @logger.debug "#{self}: Requested root_url."
-        @socket.print Response.gen_root,
+        @socket.print Response.gen_root
         @socket.close
       when :time
         @logger.debug "#{self}: Requested root_url."
@@ -40,10 +40,11 @@ class Request
         @socket.close
       else
         @logger.warn "#{self}: Unknown action #{qs_hash[:action]}!"
-        @socket.print Response.gen_404,
+        @socket.print Response.gen_404
         @socket.close
-        @logger.debug "#{self}: Done request handling."
     end
+
+    @logger.debug "#{self}: Done request handling."
   end
 
 
@@ -143,11 +144,16 @@ class Request
     #   * [] - empty array, if in the GET query there were no any params
     #   * ['Moscow', 'New York'] - array with town names, if town names specified, with comma separation
     def self.parse_query_string(query_string)
-      binding.pry
       qarr = query_string.split('?')
       path = qarr.shift
-      params_string = URI.decode(qarr.shift)
-      params = params_string.split ','
+
+      params = []
+      unless (p = qarr.shift).nil?
+        p = URI.decode(p)
+        params = p.split ','
+      end
+      # params_string = URI.decode(qarr.shift)
+      # params = params_string.split ','
       case path
         when '/'
           return {action: :root, params: params}
