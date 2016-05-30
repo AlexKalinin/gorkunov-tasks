@@ -1,0 +1,20 @@
+# Main configuration file
+
+
+# Postgres connection host
+pg_host: 127.0.0.1
+
+# Postgres connection TCP-port
+pg_port: 5432
+
+# Postgres connection username
+pg_login: postgres
+
+# Postgres connection password
+pg_password: ghjcnj
+
+# Postgres connection database
+pg_database: gorkunov
+
+# Amount of records in +like+ table
+table_like_records_amount: 100000

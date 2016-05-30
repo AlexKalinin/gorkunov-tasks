@@ -1,0 +1,20 @@
+require_relative 'init'
+
+namespace :db do
+  desc "Drop the '#{$APP_CONFIG['pg_database']}' database"
+  task :drop do
+
+    db = DbHelper.new $APP_CONFIG['pg_host'], $APP_CONFIG['pg_port'], $APP_CONFIG['pg_login'], $APP_CONFIG['pg_password'], 'postgres'
+    db.exec_query("DROP DATABASE IF EXISTS #{$APP_CONFIG['pg_database']}")
+    db.disconnect
+  end
+
+
+  desc "Drop the '#{$APP_CONFIG['pg_database']}' database"
+  task :create do
+
+    db = DbHelper.new $APP_CONFIG['pg_host'], $APP_CONFIG['pg_port'], $APP_CONFIG['pg_login'], $APP_CONFIG['pg_password'], 'postgres'
+    db.exec_query("CREATE DATABASE #{$APP_CONFIG['pg_database']}")
+    db.disconnect
+  end
+end
