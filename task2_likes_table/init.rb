@@ -20,7 +20,5 @@ $APP_ROOT = File.dirname(__FILE__)
 $APP_CONFIG = YAML.load_file(File.join($APP_ROOT, 'config/application.yml'))
 
 
-$logger = Logger.new(STDOUT)
-# listen_address = $APP_CONFIG['listen_address']
-#
-#
+# $logger = Logger.new(STDOUT)
+$logger = AppLogger.new

@@ -17,6 +17,12 @@ class DbHelper
     @connection.exec(query)
   end
 
+  # see https://deveiate.org/code/pg/PG/Connection.html
+  def exec_params(query, params_arr)
+    $logger.debug "#{self}: Executing query: #{query} with params #{params_arr}"
+    @connection.exec_params(query, params_arr)
+  end
+
   def disconnect
     @connection.close if @connection
     @connection = nil
