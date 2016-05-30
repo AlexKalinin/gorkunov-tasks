@@ -10,11 +10,38 @@ namespace :db do
   end
 
 
-  desc "Drop the '#{$APP_CONFIG['pg_database']}' database"
+  desc "Create the '#{$APP_CONFIG['pg_database']}' database"
   task :create do
 
     db = DbHelper.new $APP_CONFIG['pg_host'], $APP_CONFIG['pg_port'], $APP_CONFIG['pg_login'], $APP_CONFIG['pg_password'], 'postgres'
     db.exec_query("CREATE DATABASE #{$APP_CONFIG['pg_database']}")
     db.disconnect
+  end
+
+end
+
+namespace :test do
+  desc "Run migrations tests with the '#{$APP_CONFIG['pg_database']}' database"
+  task :migrations do
+    #db = DbHelper.new $APP_CONFIG['pg_host'], $APP_CONFIG['pg_port'], $APP_CONFIG['pg_login'], $APP_CONFIG['pg_password'], $APP_CONFIG['pg_database']
+    mig_files = Dir.glob("#{$APP_ROOT}/migrations/*.rb")
+    mig_files.each do |mf|
+      $logger.info "Processing #{mf} migration...".colorize(:light_magenta)
+      load mf
+      $logger.info "Done #{mf} migration..."
+    end
+  end
+end
+
+
+namespace :project do
+  desc 'Reset all data and run migration tests'
+  task :run do
+    $logger.info '[prject:run]: Invoking db:drop'.colorize(:light_green)
+    Rake::Task['db:drop'].invoke
+    $logger.info '[prject:run]: Invoking db:create'.colorize(:light_green)
+    Rake::Task['db:create'].invoke
+    $logger.info '[prject:run]: Invoking test:migrations'.colorize(:light_green)
+    Rake::Task['test:migrations'].invoke
   end
 end

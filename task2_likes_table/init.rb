@@ -9,6 +9,7 @@ require 'byebug'
 require 'pry'
 require 'logger'
 require 'pg'
+require 'colorize'
 
 
 require_all 'src'
