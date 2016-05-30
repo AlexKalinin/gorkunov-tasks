@@ -10,6 +10,7 @@ class StatsHelper
     end
     sum /= times.count
 
+    details = '' unless $APP_CONFIG['statistics_show_details']
 
     str = "\n==== STATISTICS:\n" +
         "\tquery: #{query}\n" +

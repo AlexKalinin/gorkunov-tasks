@@ -26,9 +26,11 @@ namespace :test do
     #db = DbHelper.new $APP_CONFIG['pg_host'], $APP_CONFIG['pg_port'], $APP_CONFIG['pg_login'], $APP_CONFIG['pg_password'], $APP_CONFIG['pg_database']
     mig_files = Dir.glob("#{$APP_ROOT}/migrations/*.rb")
     mig_files.each do |mf|
-      $logger.info "Processing #{mf} migration...".colorize(:light_magenta)
-      load mf
-      $logger.info "Done #{mf} migration..."
+      unless $APP_CONFIG['ignore_migrations'].include? Pathname.new(mf).basename.to_s
+        $logger.info "Processing #{mf} migration...".colorize(:light_magenta)
+        load mf
+        $logger.info "Done #{mf} migration..."
+      end
     end
   end
 end

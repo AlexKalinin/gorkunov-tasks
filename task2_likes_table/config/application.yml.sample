@@ -22,3 +22,11 @@ table_like_records_amount: 100000
 # Amount of query executions for calculating
 # everage spent time value for one query
 table_like_reads_amount_for_average_val: 10
+
+# Show full details in statistics
+statistics_show_details: false
+
+# Abbility to ignore some migrations from execution chain
+ignore_migrations:
+  - 1004_add_pkey.rb
+  - 1005_time_after_optimization.rb
