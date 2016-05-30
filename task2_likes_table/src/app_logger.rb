@@ -17,6 +17,6 @@ class AppLogger
 
   private
     def log(msg, level)
-      puts "[#{Time.now}][#{level}]\t#{msg}"
+      puts "[#{Time.now}][#{Time.now.to_f.to_s}][#{level}]\t#{msg}"
     end
 end

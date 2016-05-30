@@ -18,3 +18,7 @@ pg_database: gorkunov
 
 # Amount of records in +like+ table
 table_like_records_amount: 100000
+
+# Amount of query executions for calculating
+# everage spent time value for one query
+table_like_reads_amount_for_average_val: 10

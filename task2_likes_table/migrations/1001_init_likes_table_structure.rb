@@ -1,6 +1,6 @@
-MIGRATION_ID = '[Migration 1001_init_likes_table_structure.rb]'
+migration_id = '[Migration 1001_init_likes_table_structure.rb]'
 
-$logger.info "#{MIGRATION_ID}: Strarting migration"
+$logger.info "#{migration_id}: Strarting migration"
 
 sql = <<END_SQL.gsub(/\s+/, ' ').strip
 CREATE TABLE public.likes
