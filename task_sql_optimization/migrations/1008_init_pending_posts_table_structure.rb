@@ -34,8 +34,8 @@ CREATE TABLE pending_posts
   id serial NOT NULL,
   post_id integer NOT NULL,
   user_id integer NOT NULL,
-  approved boolean NOT NULL,
-  banned boolean NOT NULL,
+  approved smallint NOT NULL,
+  banned smallint NOT NULL,
   CONSTRAINT pending_posts_pkey PRIMARY KEY (id),
   CONSTRAINT pending_posts_post_id_fkey FOREIGN KEY (post_id)
       REFERENCES posts (id) MATCH SIMPLE

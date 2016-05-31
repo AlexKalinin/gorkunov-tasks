@@ -14,8 +14,8 @@ q = <<END_SQL.gsub(/\s+/, ' ').strip
 
 SELECT * from pending_posts
     WHERE user_id <> $1
-      AND NOT approved
-      AND NOT banned
+      AND approved = 0
+      AND banned = 0
       AND pending_posts.id NOT IN(
         SELECT pending_post_id FROM viewed_posts
           WHERE user_id = $2)

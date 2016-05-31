@@ -59,8 +59,8 @@ for i in 0..(N_POSTS - 1) do
     next if [true, false].sample
 
     user_id = users_ids[j]
-    approved = [true, false].sample
-    banned = [true, false].sample
+    approved = [1, 0].sample
+    banned = [1, 0].sample
     query = 'INSERT INTO pending_posts(post_id, user_id, approved, banned)VALUES ($1, $2, $3, $4);'
     db.exec_params(query, [post_id, user_id, approved, banned])
 
