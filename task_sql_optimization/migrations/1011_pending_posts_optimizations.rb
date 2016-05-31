@@ -26,7 +26,7 @@ $logger.info "#{migration_id}: Strarting migration"
 
 sql = <<END_SQL.gsub(/\s+/, ' ').strip
 
-  CREATE INDEX ON pending_posts (approved, banned, id);
+  CREATE INDEX ON pending_posts (approved, banned, id, user_id, post_id);
   CREATE INDEX ON viewed_posts (pending_post_id);
   CREATE INDEX ON viewed_posts (user_id);
 

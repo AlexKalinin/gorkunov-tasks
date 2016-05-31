@@ -12,7 +12,7 @@ NUM_USERS = q.first['last_value'].to_i
 
 q = <<END_SQL.gsub(/\s+/, ' ').strip
 
-SELECT * from pending_posts
+SELECT id, user_id, post_id from pending_posts
     WHERE user_id <> $1
       AND approved = 0
       AND banned = 0
