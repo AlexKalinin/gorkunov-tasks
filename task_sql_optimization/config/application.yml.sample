@@ -19,8 +19,15 @@ pg_database: gorkunov
 # Amount of records in +like+ table
 table_like_records_amount: 1000
 
-# Amount of records in +pending_posts+ table
-table_pending_posts_records_amount: 1000
+# Amount of records in +posts+ table
+# CAUTION: pending_posts_amount = posts_amount * users_amount !
+# CAUTION: viewed_posts_amount = posts_amount * users_amount !
+table_posts_records_amount: 100
+
+# Amount of records in +users+ table
+# CAUTION: pending_posts_amount = posts_amount * users_amount !
+# CAUTION: viewed_posts_amount = posts_amount * users_amount !
+table_users_records_amount: 100
 
 # Amount of query executions for calculating
 # everage spent time value for one query
@@ -36,6 +43,7 @@ statistics_show_details: false
 
 # Abbility to ignore some migrations from execution chain
 ignore_migrations:
+  # dismiss ticket #3 migrations
   - 1001_init_likes_table_structure.rb
   - 1002_fill_with_data.rb
   - 1003_time_before_optimization.rb
@@ -43,3 +51,7 @@ ignore_migrations:
   - 1005_time_after_optimization.rb
   - 1006_add_btree_index.rb
   - 1007_time_after_optimization.rb
+
+  ## dismiss ticket #4 migrations
+  #- 1008_init_pending_posts_table_structure.rb
+  #- 1009_fill_pending_posts_with_data.rb

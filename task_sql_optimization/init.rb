@@ -7,9 +7,9 @@ require 'rake'
 require 'require_all'
 require 'byebug'
 require 'pry'
-require 'logger'
 require 'pg'
 require 'colorize'
+require 'forgery'
 
 
 require_all 'src'

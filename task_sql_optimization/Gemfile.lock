@@ -4,7 +4,7 @@ GEM
     byebug (9.0.5)
     coderay (1.1.1)
     colorize (0.7.7)
-    logger (1.2.8)
+    forgery (0.6.0)
     method_source (0.8.2)
     pg (0.18.4)
     pry (0.10.3)
@@ -26,7 +26,7 @@ PLATFORMS
 DEPENDENCIES
   byebug
   colorize
-  logger
+  forgery
   pg
   pry-byebug
   pry-rails

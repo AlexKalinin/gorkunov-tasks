@@ -1,1 +1,2 @@
 # We have local .gitignore for each task-folder
+.tags

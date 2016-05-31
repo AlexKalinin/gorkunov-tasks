@@ -1,10 +1,18 @@
 source 'https://rubygems.org'
-
-gem 'logger'
+# Abbility to require (load ruby code) with whole folder
 gem 'require_all'
+
+# PostgreSQL driver
 gem 'pg'
+
+# rake task manager
 gem 'rake'
+
+# for STDOUT outpus colorization
 gem 'colorize'
+
+# for random data generation
+gem 'forgery'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
