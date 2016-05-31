@@ -56,7 +56,11 @@ CREATE TABLE viewed_posts
   id serial NOT NULL,
   user_id integer NOT NULL,
   post_id integer NOT NULL,
+  pending_post_id integer,
   CONSTRAINT viewed_posts_pkey PRIMARY KEY (id),
+  CONSTRAINT viewed_posts_pending_post_id_fkey FOREIGN KEY (pending_post_id)
+      REFERENCES pending_posts (id) MATCH SIMPLE
+      ON UPDATE RESTRICT ON DELETE RESTRICT,
   CONSTRAINT viewed_posts_post_id_fkey FOREIGN KEY (post_id)
       REFERENCES posts (id) MATCH SIMPLE
       ON UPDATE RESTRICT ON DELETE RESTRICT,
