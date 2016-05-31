@@ -2,12 +2,31 @@ migration_id = '[Migration 1011_add_indexes.rb]'
 
 $logger.info "#{migration_id}: Strarting migration"
 
+# sql = <<END_SQL.gsub(/\s+/, ' ').strip
+#
+#   CREATE INDEX pending_posts_post_id_user_id_approved_banned_idx
+#   ON pending_posts
+#   USING btree
+#   (post_id DESC, user_id DESC, approved DESC, banned DESC);
+#
+#
+# END_SQL
+
+
+# sql = <<END_SQL.gsub(/\s+/, ' ').strip
+#
+#   CREATE INDEX pending_posts_post_id_user_id_approved_banned_idx
+#   ON pending_posts
+#   USING btree
+#   (post_id, user_id, approved, banned);
+#
+#
+# END_SQL
+
+
 sql = <<END_SQL.gsub(/\s+/, ' ').strip
 
-  CREATE INDEX pending_posts_post_id_user_id_approved_banned_idx
-  ON pending_posts
-  USING btree
-  (post_id DESC, user_id DESC, approved DESC, banned DESC);
+  CREATE INDEX ON viewed_posts (user_id);
 
 
 END_SQL
